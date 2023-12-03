@@ -1,0 +1,41 @@
+# Node.js
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Environment variables
+.env
+
+# Dependency directory
+.pnp/
+.pnp.js
+
+# macOS
+.DS_Store
+
+# Editor directories
+.idea/
+.vscode/
+
+# Node package manager
+npm-debug.log
+yarn-error.log
+
+# Coverage directory
+coverage/
+
+# Build files
+build/
+dist/
+out/
+
+# dotenv environment variable files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Yarn Integrity file
+.yarn-integrity

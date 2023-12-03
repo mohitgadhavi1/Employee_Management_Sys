@@ -1,0 +1,9 @@
+- project-folder
+  |- controllers
+     |- authController.js
+  |- models
+     |- Manager.js
+     |- Employee.js
+  |- routes
+     |- authRoutes.js
+  |- app.js
