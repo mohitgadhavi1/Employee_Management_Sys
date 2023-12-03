@@ -8,20 +8,18 @@ require("dotenv").config();
 
 const generateToken = (user) => {
   const secretKey =
-    user.userType === 'manager'
+    user.userType === "manager"
       ? process.env.JWT_SECRET_KEY_MANAGER
       : process.env.JWT_SECRET_KEY_EMPLOYEE;
 
   return jwt.sign({ userId: user._id, userType: user.userType }, secretKey, {
-    expiresIn: '1h',
+    expiresIn: "1h",
   });
 };
 
 exports.signupUser = async (req, res) => {
   try {
     const { username, password, userType } = req.body;
-
-    const UserModel = userType === "manager" ? Manager : Employee;
 
     const existingUser = await User.findOne({ username });
     if (existingUser) {
@@ -30,9 +28,10 @@ exports.signupUser = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = await UserModel.create({
+    const newUser = await User.create({
       username,
       password: hashedPassword,
+      userType
     });
 
     const token = generateToken(newUser);
@@ -55,9 +54,8 @@ exports.signupUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
   try {
     const { username, password, userType } = req.body;
-    const userModel = userType === "manager" ? Manager : Employee;
 
-    const user = await userModel.findOne({ username });
+    const user = await User.findOne({ username });
 
     if (!user) {
       return res.status(401).json({ error: "USERNAME does not exist" });

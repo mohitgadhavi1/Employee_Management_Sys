@@ -7,7 +7,7 @@ const departmentRoutes = require("./routes/departmentRoute.js");
 
 require("dotenv").config();
 
-// let cors = require("cors");
+let cors = require("cors");
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -23,7 +23,7 @@ mongoose
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.static("public"));
 
 app.use(employeeRoutes);
