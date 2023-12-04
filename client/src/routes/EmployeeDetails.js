@@ -2,6 +2,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
+import Logout from "../components/Logout";
 
 const EmployeeDetails = () => {
   const token = useSelector((state) => state.auth.token);
@@ -20,6 +21,7 @@ const EmployeeDetails = () => {
 
   return isAuthenticated ? (
     <div className="p-8">
+         <Logout />
       <h2 className="text-2xl font-bold mb-4">{employee.name}</h2>
     </div>
   ) : (

@@ -41,8 +41,10 @@ export const useFetchEmployeeList = () => {
       }
     };
 
-    fetchEmployeeList();
-  }, []);
+    if (token) {
+      fetchEmployeeList();
+    }
+  }, [token]);
 
   return { employeeList, loading, error };
 };
@@ -71,6 +73,7 @@ export const useFetchDepartmentList = () => {
         }
 
         const data = await response.json();
+        console.log("data", data);
         dispatch(initialDepartment(data));
         setDepartmentList(data);
       } catch (error) {
@@ -80,9 +83,10 @@ export const useFetchDepartmentList = () => {
         setLoading(false);
       }
     };
-
-    fetchDepartmentList();
-  }, []);
+    if (token) {
+      fetchDepartmentList();
+    }
+  }, [token]);
 
   return { departmentList, loading, error };
 };

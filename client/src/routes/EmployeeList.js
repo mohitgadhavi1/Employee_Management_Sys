@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { assignDepartment } from "../store/features/employeeSlice";
+import Logout from "../components/Logout";
 
 const EmployeeList = () => {
+  
+  const token = useSelector((state) => state.auth.token);
+  const isAuthenticated = token ? true : false;
+
   const employees = useSelector((state) => state.employees);
+  console.log("employees",employees)
   const dispatch = useDispatch();
 
   const [selectedEmployee, setSelectedEmployee] = useState(null);
@@ -22,12 +28,10 @@ const EmployeeList = () => {
     setShowModal(false);
   };
 
-  const token = useSelector((state) => state.auth.token);
-
-  const isAuthenticated = token ? true : false;
 
   return isAuthenticated ? (
     <div className="p-8">
+         <Logout />
       <h2 className="text-2xl font-bold mb-4">Employee List</h2>
       <table className="w-full">
         <thead>

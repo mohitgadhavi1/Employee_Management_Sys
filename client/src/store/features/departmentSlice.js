@@ -23,6 +23,7 @@ const departmentSlice = createSlice({
       return state.filter((department) => department.id !== id);
     },
     initialDepartment: (state, action) => {
+      console.log("action.payload",action.payload)
       state = action.payload;
     },
   },

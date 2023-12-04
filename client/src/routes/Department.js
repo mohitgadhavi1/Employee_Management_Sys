@@ -6,6 +6,7 @@ import {
   deleteDepartment,
 } from "../store/features/departmentSlice";
 import { Navigate } from "react-router-dom";
+import Logout from "../components/Logout";
 
 const Department = () => {
   const [newDepartment, setNewDepartment] = useState("");
@@ -41,6 +42,7 @@ const Department = () => {
 
   return isAuthenticated ? (
     <div className="p-8">
+      <Logout />
       <h2 className="text-2xl font-bold mb-4">List of Departments</h2>
 
       <ul>
