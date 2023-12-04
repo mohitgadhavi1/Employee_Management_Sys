@@ -1,10 +1,11 @@
 // src/components/Signup.js
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSignupUser } from "../hooks/useAuthApi";
 
 
 const Signup = () => {
+  const navigate = useNavigate()
   const [userType, setUserType] = useState("employee");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -18,10 +19,18 @@ const Signup = () => {
     // console.log("User Type:", userType);
 
     const newUser = { username, password, userType };
-    await signupUser(newUser);
 
-    console.log("User signed up successfully");
+
+    try {
+      await signupUser(newUser);
+      
+      navigate("/")
+    } catch (error) {
+   
+      console.error('Signup failed:', error);
+    }
   };
+
 
   return (
     <div className="flex items-center justify-center h-screen">

@@ -1,9 +1,11 @@
 // src/components/Login.js
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useLoginUser } from "../hooks/useAuthApi";
 
 const Login = () => {
+const navigate = useNavigate()
+
   const [userType, setUserType] = useState("employee");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -16,11 +18,20 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const existingUser = { username, password };
-    await loginUser(existingUser);
+    const existingUser = { username, password,userType };
+  
 
-    console.log("User logged in successfully");
+    try {
+      await loginUser(existingUser);
+      
+      navigate("/")
+    } catch (error) {
+   
+      console.error('Login failed:', error);
+    }
   };
+
+
 
   return (
     <div className="flex items-center justify-center h-screen">

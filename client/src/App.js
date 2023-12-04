@@ -1,15 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import {
   useFetchDepartmentList,
   useFetchEmployeeList,
 } from "./hooks/useFetchDetails";
+import { useSelector } from "react-redux";
 
 function App() {
+  const token = useSelector((state) => state.auth.token);
+
+  const isAuthenticated = token ? true : false;
   const { employeeList, loading1, error1 } = useFetchEmployeeList();
   const { departmentList, loading2, error2 } = useFetchDepartmentList();
 
-  return (
+  console.log("employeeList", employeeList);
+  console.log("departmentList", departmentList);
+
+  return isAuthenticated ? (
     <div className="flex items-center justify-center h-screen">
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-8">Welcome to Admin Dashnboard</h1>
@@ -26,6 +33,8 @@ function App() {
         </nav>
       </div>
     </div>
+  ) : (
+    <Navigate to="/login" />
   );
 }
 

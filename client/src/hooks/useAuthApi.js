@@ -1,11 +1,14 @@
+import { useDispatch } from "react-redux";
 import {
   signupUser as signupUserUrl,
   loginUser as loginUserUrl,
 } from "../services";
 
 import { useState } from "react";
+import { setToken } from '../store/features/authSlice';
 
 export const useSignupUser = () => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -23,11 +26,12 @@ export const useSignupUser = () => {
       if (!response.ok) {
         throw new Error("User signup failed");
       }
-
-      // Handle successful signup
-      console.log("User signed up successfully");
+      const { token } = await response.json();
+      dispatch(setToken(token));
+     
+      console.log(token);
     } catch (error) {
-      // Handle signup error
+  
       setError(error.message);
       console.error("User signup failed:", error);
     } finally {
@@ -39,6 +43,7 @@ export const useSignupUser = () => {
 };
 
 export const useLoginUser = () => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -57,10 +62,12 @@ export const useLoginUser = () => {
         throw new Error("User login failed");
       }
 
-      // Handle successful signup
-      console.log("User login up successfully");
+      const { token } = await response.json();
+      dispatch(setToken(token));
+     
+      console.log(token);
     } catch (error) {
-      // Handle signup error
+     
       setError(error.message);
       console.error("User login failed:", error.message);
     } finally {
