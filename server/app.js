@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.static("public"));
 
-app.use(employeeRoutes);
+app.use("/employees",employeeRoutes);
 app.use('/departments', departmentRoutes);
 app.use("/auth", authRoutes);
 

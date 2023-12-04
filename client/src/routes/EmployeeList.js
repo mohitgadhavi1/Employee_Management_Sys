@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { assignDepartment } from "../store/features/employeeSlice";
 
 const EmployeeList = () => {
@@ -22,7 +22,11 @@ const EmployeeList = () => {
     setShowModal(false);
   };
 
-  return (
+  const token = useSelector((state) => state.auth.token);
+
+  const isAuthenticated = token ? true : false;
+
+  return isAuthenticated ? (
     <div className="p-8">
       <h2 className="text-2xl font-bold mb-4">Employee List</h2>
       <table className="w-full">
@@ -63,11 +67,10 @@ const EmployeeList = () => {
       </table>
 
       {showModal && (
-
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-8 rounded-md">
             <h2 className="text-2xl font-bold mb-4">Select Department</h2>
-      
+
             <button
               className="bg-blue-500 text-white rounded-md py-2 px-4 ml-2 hover:bg-blue-600"
               onClick={() =>
@@ -86,6 +89,8 @@ const EmployeeList = () => {
         </div>
       )}
     </div>
+  ) : (
+    <Navigate to={"/login"} />
   );
 };
 

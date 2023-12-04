@@ -3,23 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const employeeSlice = createSlice({
   name: "employees",
-  initialState: [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john.doe@example.com",
-      position: "Developer",
-      department: null,
-    },
-    {
-      id: 2,
-      name: "Jane Doe",
-      email: "jane.doe@example.com",
-      position: "Designer",
-      department: null,
-    },
-    // Add more initial employees as needed
-  ],
+  initialState: [],
   reducers: {
     assignDepartment: (state, action) => {
       const { employeeId, departmentId } = action.payload;
@@ -30,8 +14,11 @@ const employeeSlice = createSlice({
         state[employeeIndex].department = departmentId;
       }
     },
+    initialEmployees: (state, action) => {
+      state = action.payload;
+    },
   },
 });
 
-export const { assignDepartment } = employeeSlice.actions;
+export const { assignDepartment, initialEmployees } = employeeSlice.actions;
 export default employeeSlice.reducer;

@@ -8,10 +8,10 @@ export const loginUser = `${BASE_URL}/auth/login`;
 //====================================================================================
 
 export const department = `${BASE_URL}/departments`;
-export const employeeList = `${BASE_URL}/employeeList`;
+export const employeeList = `${BASE_URL}/employees`;
 
 export const filtedEmployeeList = (type, order) =>
-  `${BASE_URL}/employeeList?${type}=${order}`;
+  `${BASE_URL}/employees?${type}=${order}`;
 
 
 //====================================================================================

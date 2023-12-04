@@ -1,8 +1,8 @@
 // src/reducers/departmentSlice.js
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const departmentSlice = createSlice({
-  name: 'departments',
+  name: "departments",
   initialState: [],
   reducers: {
     addDepartment: (state, action) => {
@@ -22,8 +22,12 @@ const departmentSlice = createSlice({
       const id = action.payload;
       return state.filter((department) => department.id !== id);
     },
+    initialDepartment: (state, action) => {
+      state = action.payload;
+    },
   },
 });
 
-export const { addDepartment, updateDepartment, deleteDepartment } = departmentSlice.actions;
+export const { addDepartment, updateDepartment, deleteDepartment,initialDepartment } =
+  departmentSlice.actions;
 export default departmentSlice.reducer;

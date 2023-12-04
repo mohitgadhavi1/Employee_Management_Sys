@@ -1,19 +1,23 @@
-
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addDepartment, updateDepartment, deleteDepartment } from '../store/features/departmentSlice';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addDepartment,
+  updateDepartment,
+  deleteDepartment,
+} from "../store/features/departmentSlice";
+import { Navigate } from "react-router-dom";
 
 const Department = () => {
-  const [newDepartment, setNewDepartment] = useState('');
+  const [newDepartment, setNewDepartment] = useState("");
   const [editDepartment, setEditDepartment] = useState(null);
 
   const dispatch = useDispatch();
   const departments = useSelector((state) => state.department);
-  console.log(departments)
+  console.log(departments);
 
   const handleAddDepartment = () => {
     dispatch(addDepartment(newDepartment));
-    setNewDepartment('');
+    setNewDepartment("");
   };
 
   const handleEditDepartment = (id, name) => {
@@ -24,14 +28,18 @@ const Department = () => {
   const handleUpdateDepartment = () => {
     dispatch(updateDepartment({ id: editDepartment, name: newDepartment }));
     setEditDepartment(null);
-    setNewDepartment('');
+    setNewDepartment("");
   };
 
   const handleDeleteDepartment = (id) => {
     dispatch(deleteDepartment(id));
   };
 
-  return (
+  const token = useSelector((state) => state.auth.token);
+
+  const isAuthenticated = token ? true : false;
+
+  return isAuthenticated ? (
     <div className="p-8">
       <h2 className="text-2xl font-bold mb-4">List of Departments</h2>
 
@@ -58,7 +66,9 @@ const Department = () => {
                 <span>{department.name}</span>
                 <button
                   className="bg-yellow-500 text-white rounded-md py-2 px-4 ml-2 hover:bg-yellow-600"
-                  onClick={() => handleEditDepartment(department.id, department.name)}
+                  onClick={() =>
+                    handleEditDepartment(department.id, department.name)
+                  }
                 >
                   Edit
                 </button>
@@ -91,6 +101,8 @@ const Department = () => {
         </button>
       </div>
     </div>
+  ) : (
+    <Navigate to={"/login"} />
   );
 };
 
