@@ -1,4 +1,5 @@
-
+ ***SOME FEATURES YET TO BE IMPLEMENTED IN THE PROJECT *** 
+ 
 To execute the application locally, follow these steps:
 
 Navigate to the server Folder.
@@ -10,3 +11,5 @@ This sequence ensures a smooth setup for running the application on your local m
 
 On the frontend, I've Used React, Redux, React Router, and Tailwind CSS. 
  on the backend, I've implemented Node.js and Express, with MongoDB serving as the chosen database.
+
+
