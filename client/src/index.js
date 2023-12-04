@@ -17,6 +17,7 @@ import Department from "./routes/Department";
 import EmployeeDetails from "./routes/EmployeeDetails";
 import EmployeeList from "./routes/EmployeeList";
 
+
 const isAuthenticated = false;
 
 const router = createBrowserRouter([
